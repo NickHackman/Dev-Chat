@@ -1,0 +1,37 @@
+asyncapi: 2.0.0
+info:
+  title: Dev Chat
+  description: A simple chat application for developers
+  version: "0.1.0"
+  license:
+    name: MIT
+channels:
+  /chat:
+    subscribe:
+      summary: Client can receive chat messages.
+      operationId: subChatMessage
+      message:
+        $ref: "#/components/messages/chatMessage"
+    publish:
+      summary: Client can send chat messages.
+      operationId: pubChatMessage
+      message:
+        $ref: "#/components/messages/chatMessage"
+
+components:
+  messages:
+    chatMessage:
+      summary: Message that you send or receive from chat
+      payload:
+        type: object
+        properties:
+          message:
+            type: string
+            description: message sent
+          edited:
+            type: boolean
+            description: whether or not the message was edited
+          parent_id:
+            type: string
+            nullable: true
+            description: parent message's id, null if top level
