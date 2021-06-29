@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Dev Chat
+  description: A simple chat application for developers
+  version: "0.1.0"
+  license:
+    name: MIT
+paths:
+  /api/v1/users/{id}:
+    delete:
+      responses:
+        "200":
+          description: successfully deleted user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/standardMessage"
+        "400":
+          description: user id not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/standardMessage"
+        "401":
+          description: failed to authorize
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/standardMessage"
+        "500":
+          description: internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/standardMessage"
+    patch:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/updateUser"
+      responses:
+        "200":
+          description: updated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/standardMessage"
+      deprecated: false
+  /api/v1/auth/github:
+    get:
+      responses:
+        "200":
+          description: successfully authenticated with Github
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/auth"
+  /api/v1/auth/github/callback:
+    get:
+      responses:
+        "200":
+          description: successfully authenticated with Github
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/auth"
+
+components:
+  schemas:
+    standardMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: explanation of success or failure
+    auth:
+      type: object
+      properties:
+        token:
+          type: string
+          description: JSON Web token used to authenticate in subsequent requests
+    updateUser:
+      type: object
+      properties:
+        nickname:
+          type: string
+          nullable: true
+          description: new name of the user
+        status:
+          type: string
+          nullable: true
+          description: status of the user
