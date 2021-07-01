@@ -10,6 +10,12 @@ import { CurrentUserComponent } from './current-user/current-user.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ChatComponent } from './chat/chat.component';
 import { NavigationComponent } from './navigation/navigation.component';
+//importing env variables and Auth0 Module
+import { AuthModule } from '@auth0/auth0-angular';
+import { environment as env } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
+import { LoadingComponent } from './loading/loading.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +27,17 @@ import { NavigationComponent } from './navigation/navigation.component';
     LogoutComponent,
     ChatComponent,
     NavigationComponent,
+    LoginComponent,
+    LoadingComponent,
+    HomeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule.forRoot({
+      ...env.auth,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
