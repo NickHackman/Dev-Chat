@@ -1,1 +1,16 @@
-<p>navigation works!</p>
+<div style="text-align: end">
+  <a
+    *ngIf="(auth.isAuthenticated$ | async) == false"
+    class="btn btn-primary m-2"
+    [routerLink]="['/login']"
+    >Login</a
+  >
+  <a
+    *ngIf="(auth.isAuthenticated$ | async) == true"
+    class="btn btn-primary m-2"
+    [routerLink]="['/logout']"
+    >Logout</a
+  >
+
+  <a class="btn btn-primary m-2" [routerLink]="['/profile']">Profile</a>
+</div>

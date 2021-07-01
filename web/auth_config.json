@@ -1,0 +1,6 @@
+{
+  "domain": "dev-64g3f3vx.eu.auth0.com",
+  "clientId": "bprXt7xOFgbtkcvIVxV9Fw0QQUPbi8de",
+  "audience": "http://your-audience-identifier",
+  "apiUrl": "http://localhost:7000"
+}
